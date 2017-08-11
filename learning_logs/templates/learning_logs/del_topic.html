@@ -1,0 +1,40 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+<html>
+
+	<head>
+		<title> Learning Log delete topic </title>
+	</head>
+
+
+	<body>
+		<br/>
+		<div>
+			<ul>
+				{% for topic in topics %}
+					<li> <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a> </li>
+					{% empty %}
+					<li> No topics have been added yet </li>
+				{% endfor %}
+			</ul>
+		</div>
+
+		<div>
+			<h2> Delete a topic : </h2>
+		</div>
+
+		<div>			
+			<form  action = "{% url 'learning_logs:del_topic' %}"  method = 'post'>
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button name="submit"> delete Topic </button>
+			</form>
+		</div>
+	</body>
+
+</html>
+
+
+{% endblock content %}
